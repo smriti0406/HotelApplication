@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Smriti Hotel Application</title>
+        <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id = "query">
+            <% if(user.Name=="guest") {%>
+                <a href="/login" >login</a><br>
+            <% }  %>
+            <% if(user.Name!="guest") {%>
+                <p><%= user.Name %></p>
+                <p><%= user.Email %></p> 
+                <p><%= user.Contact %></p> 
+                <p><%= user.Id_number %></p> 
+            <% } %>
+            <form action="/results", method="post">
+                <table>
+                    <tr>
+                       <th>RoomNumber</th>
+                       <th>Roomtype</th>
+                       <th>Price</th>
+                       <th>Select</th>
+                    </tr>
+                    <tr>
+                       <% for(var i=0;i<list.length; i++) { %>
+                          <tr>
+                              <td><input type="radio" name="Room_number" value=<%= list[i].Room_number %> ></td>   
+                              <td><%= list[i].Room_number %></td>
+                              <td><%= list[i].Room_type %></td>
+                              <td><%= list[i].Price %></td>
+                          </tr>  
+                       <% } %>
+                   </tr>
+                </table>
+                <button type="submit">Confirm</button>
+            </form>
+            <% if(user.Name!="guest") {%>
+                <form action="/logout" method="POST">
+                    <button type="submit">logout</button>
+                </form>
+            <% } %>
+        </div>
+    </body>
+</html>

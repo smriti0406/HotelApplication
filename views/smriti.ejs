@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Smriti Hotel Application</title>
+        <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id = "query">
+            <% if(user.Name=="guest") {%>
+                <a href="/login" >login</a><br>
+            <% }  %>
+            <% if(user.Name!="guest") {%>
+                <p><%= user.Name %></p>
+                <p><%= user.Email %></p> 
+                <p><%= user.Contact %></p> 
+                <p><%= user.Id_number %></p> 
+            <% } %>
+            <label for="Room_type">Choose your room type:</label>
+            <form action="/smriti" method="post">
+                <select name = "room" id = "room">
+                    <option value="all">All</option>
+                    <option value="Single">Single</option>
+                    <option value="double">Double</option>
+                    <option value="King">King</option>
+                    <option value="Queen">Queen</option>
+                    <option value="double double">Double Double</option>
+                    <option value="Cabana">Cabana</option>
+                    <option value="Suite">Suite</option>
+                    <option value="Presidential Suite">Presidential Suite</option>
+                </select>
+                <input type="datetime-local" name="CheckINN"/>
+                <input type="datetime-local" name="CheckOUT"/>
+                <button type="submit">Enter</button>
+            </form>
+            <% if(user.Name!="guest") {%>
+                <form action="/logout" method="POST">
+                    <button type="submit">logout</button>
+                </form>
+            <% } %>
+        </div>
+    </body>
+</html>

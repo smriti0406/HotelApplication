@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Smriti Hotel Application</title>
+        <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id = "query">
+            <% if(user.Name=="guest") {%>
+                <a href="/login" >login</a><br>
+            <% }  %>
+            <% if(user.Name!="guest") {%>
+                <p><%= user.Name %></p>
+                <p><%= user.Email %></p> 
+                <p><%= user.Contact %></p> 
+                <p><%= user.Id_number %></p> 
+            <% } %>
+            <form action="/booking", method="post">
+                <input type="text", name="Room", value=<%= Room %>><br>
+            </form>
+            <% if(user.Name!="guest") {%>
+                <form action="/logout" method="POST">
+                    <button type="submit">logout</button>
+                </form>
+            <% } %>
+        </div>
+    </body>
+</html>
