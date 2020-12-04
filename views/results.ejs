@@ -14,7 +14,7 @@
                 <p><%= user.Contact %></p> 
                 <p><%= user.Id_number %></p> 
             <% } %>
-            <form action="/results", method="post">
+            <form action="/results?room=<%=room%>&entry=<%=entry%>&exit=<%=exit%>", method="post">
                 <table>
                     <tr>
                        <th>RoomNumber</th>
@@ -25,7 +25,7 @@
                     <tr>
                        <% for(var i=0;i<list.length; i++) { %>
                           <tr>
-                              <td><input type="radio" name="Room_number" value=<%= list[i].Room_number %> ></td>   
+                              <td><input type="radio" name="Room_number" value=<%{%> <%=list[i].Room_number %>,<%= list[i].Price %> <%}%> ></td>   
                               <td><%= list[i].Room_number %></td>
                               <td><%= list[i].Room_type %></td>
                               <td><%= list[i].Price %></td>

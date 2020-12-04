@@ -1,5 +1,6 @@
 var AWS = require('aws-sdk');
 const bodyParser = require('body-parser');
+const { response } = require('express');
 const checkAuth = require('./middleware/checkauth');
 const FindByToken = require('./middleware/FindByToken');
 var credi = false;
@@ -17,15 +18,16 @@ module.exports = function(app){
   app.use(bodyParser.json());
   app.post('/smriti',FindByToken,function(req,res){
       
-    response = {  
+  var response1 = {  
       inn_time:req.body.CheckINN,  
       out_time:req.body.CheckOUT,
       type:req.body.room
   };  
-  console.log(response);
-  var d = new Date(response.inn_time);
-  var x = new Date(response.out_time);
+  console.log(response1);
+  var d = new Date(response1.inn_time);
+  var x = new Date(response1.out_time);
   var y = new Date();
+  console.log(y);
   if(x<d||d<y||x<y)
   {
     //console.log(user);
@@ -33,7 +35,7 @@ module.exports = function(app){
     res.render('smriti',{user: req.user});
     credi=false;
   }
-  else if(response.type==="all")
+  else if(response1.type==="all")
   {
     var vec = [];
      var params={
@@ -55,8 +57,8 @@ module.exports = function(app){
             var select = true;
             for(i=0;i<l;i++)
             {
-                var x1 = new Date(response.inn_time);
-                var y1 = new Date(response.out_time);
+                var x1 = new Date(response1.inn_time);
+                var y1 = new Date(response1.out_time);
                 if((x1>=inn_time[i]&&x1<=out_time[i])||(y1>=inn_time[i]&&y1<=out_time[i]))
                 {
                     select = false;
@@ -74,7 +76,7 @@ module.exports = function(app){
               params.ExclusiveStartKey = data.LastEvaluatedKey;
               docClient.scan(params, onScan);
           }
-          res.render('results',{list:vec});
+          res.render('results',{list:vec,user:req.user,room:response1.type,entry:response1.inn_time,exit:response1.out_time});
       }
      }
   }
@@ -86,7 +88,7 @@ module.exports = function(app){
       IndexName: "Room_type-index",
       KeyConditionExpression: "Room_type = :type",
       ExpressionAttributeValues: {
-          ":type": response.type
+          ":type": response1.type
       }
   }
     docClient.query(params, function(err,data){
@@ -96,7 +98,7 @@ module.exports = function(app){
       else{
           console.log("Query succeeded.");
           data.Items.forEach(function(item) {
-            console.log(item);
+            //console.log(item);
               var inn_time = item.entry_time;
               var out_time = item.exit_time;
               var l = inn_time.length;
@@ -104,8 +106,8 @@ module.exports = function(app){
               var select = true;
               for(i=0;i<l;i++)
               {
-                  var x1 = new Date(response.inn_time);
-                  var y1 = new Date(response.out_time);
+                  var x1 = new Date(response1.inn_time);
+                  var y1 = new Date(response1.out_time);
                   if((x1>=inn_time[i]&&x1<=out_time[i])||(y1>=inn_time[i]&&y1<=out_time[i]))
                   {
                       select = false;
@@ -118,16 +120,22 @@ module.exports = function(app){
                  vec.push(item);
               }
           })
-          res.render('results',{list:vec,user: req.user});
+          //console.log(req.user);
+          console.log(response1.type);
+          res.render('results',{list:vec,user:req.user,room:response1.type,entry:response1.inn_time,exit:response1.out_time});
                 
       }
   })
   }
   })
-
+  
   app.post('/results',checkAuth ,function(req,res){
-    console.log(req.body);
-    res.render('booking',{Room:req.body.Room_number,user:req.user});
+    console.log(req.query);
+    //console.log(req.body.Room_number);
+    var arr = req.body.Room_number.split(",",2);
+    arr[1] = parseInt(arr[1]);
+    console.log(arr[1]);
+    res.render('booking',{room:arr[0],price:arr[1],entry:req.query.entry,exit:req.query.exit,user:req.user});
   });
 
   

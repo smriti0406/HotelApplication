@@ -188,12 +188,11 @@ module.exports = function(app){
                         res.redirect();
                     }else{
                         res.clearCookie('auth');
+                        //console.log()
                         res.render('smriti',{user: user})
                     }
                 })
                 
     });
-    // app.listen(port,()=>{
-    //     console.log(`Server is listening on port ${port}`)
-    // });u
+   
 };
