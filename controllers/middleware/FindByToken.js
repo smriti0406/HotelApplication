@@ -7,7 +7,8 @@ const jwt = require('jsonwebtoken');
 var user = {Name: "guest"};
 module.exports = (req,res,next)=> {
     var token = req.cookies.auth;
-       
+    req.user=user;
+    console.log(token);
     if(token){
     try{
         //console.log(process.env.JWT_KEY);
@@ -39,8 +40,9 @@ module.exports = (req,res,next)=> {
     }
 }
 else{
-    req.user=user;
-    res.clearCookie('auth');
+    req.user={Name:"guest"};
+    console.log(req.user);
+    //res.clearCookie('auth');
     next();
 }
 }

@@ -9,13 +9,11 @@
                 <a href="/login" >login</a><br>
             <% }  %>
             <% if(user.Name!="guest") {%>
-                <p><%= user.Name %></p>
-                <p><%= user.Email %></p> 
-                <p><%= user.Contact %></p> 
-                <p><%= user.Id_number %></p> 
+                <a href="/user?Name=<%=user.Name%>" >Your Account</a><br>
             <% } %>
+            <%- include ('./partials/messages') %>
             <label for="Room_type">Choose your room type:</label>
-            <form action="/smriti" method="post">
+            <form action="/result" method="post">
                 <select name = "room" id = "room">
                     <option value="all">All</option>
                     <option value="Single">Single</option>
@@ -26,9 +24,11 @@
                     <option value="Cabana">Cabana</option>
                     <option value="Suite">Suite</option>
                     <option value="Presidential Suite">Presidential Suite</option>
-                </select>
-                <input type="datetime-local" name="CheckINN"/>
-                <input type="datetime-local" name="CheckOUT"/>
+                </select><br>
+                <label for="CheckINN">Check In Date & Time:</label><br>
+                <input type="datetime-local" name="CheckINN" required="true"/><br>
+                <label for="CheckOUT">Check Out Date & Time:</label><br>
+                <input type="datetime-local" name="CheckOUT" required="true"/><br>
                 <button type="submit">Enter</button>
             </form>
             <% if(user.Name!="guest") {%>

@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Smriti Hotel Application</title>
-        <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script>
+        <!-- <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script> -->
     </head>
     <body>
         <div id = "query">
@@ -9,15 +9,13 @@
                 <a href="/login" >login</a><br>
             <% }  %>
             <% if(user.Name!="guest") {%>
-                <p><%= user.Name %></p>
-                <p><%= user.Email %></p> 
-                <p><%= user.Contact %></p> 
-                <p><%= user.Id_number %></p> 
+                <a href="/user?Name=<%=user.Name%>" >Your Account</a>
             <% } %>
-            <p><%=room%></p>
-            <p><%=entry%></p>
-            <p><%=exit%></p>
-            <form action="/booking?:room&:entry&:exit&:price", method="post">
+            <p>Room: <%=field.room%></p>
+            <p>Probable CheckIn Date & Time: <%=field.entry%></p>
+            <p>Probable CheckOut Date & time: <%=field.exit%></p>
+            <p>Estimated Intial Price: <%=field.price%></p>
+            <form action="/booking?booking=<%=field.room%>p<%=field.entry%>p<%=field.exit%>p<%=field.price%>", method="post">
                 <label for="Name">Name:</label><br>
                 <input type="text", name="Name", value="<%=user.Name%>", required="true"><br>
                 <lable for="Address">Address:</lable><br>
@@ -28,12 +26,10 @@
                    <option value="Pan">Pan Card</option>
                 </select><br>
                 <label for="Id_number">Enter the Id number You selected</label><br>
-                <input type="text", name="Id_number",value="<%=user.Id_number%>", required="true"><br>
+                <input type="text", name="Id_number", value="<%=user.Id_number%>", required="true"><br>
                 <label for="contact">Contact Number</label><br>
-                <input type="tel", name="contact",value="<%=user.Contact%>", required="true"><br>
-                <label for="email">E-mail Address</label><br>
-                <input type="email", name="email",value="<%=user.Email%>" ,required="true"><br>
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                <input type="tel", name="contact", value="<%=user.Contact%>", required="true"><br>
+                <button type="submit" class="btn btn-primary btn-block">Confirm Booking</button>
             </form>
             <% if(user.Name!="guest") {%>
                 <form action="/logout" method="POST">

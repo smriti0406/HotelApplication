@@ -30,9 +30,8 @@ module.exports = (req,res,next)=> {
             }
         })
     }catch(error){
-        return res.status(401).json({
-            message: 'Auth failed'
-        });
+        return res.render('login',{errors:[{msg:"Your are not logged In, Please Login first."}]});
+        
     }
     
 

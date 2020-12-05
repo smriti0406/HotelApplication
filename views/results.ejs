@@ -9,12 +9,9 @@
                 <a href="/login" >login</a><br>
             <% }  %>
             <% if(user.Name!="guest") {%>
-                <p><%= user.Name %></p>
-                <p><%= user.Email %></p> 
-                <p><%= user.Contact %></p> 
-                <p><%= user.Id_number %></p> 
+                <a href="/user?Name=<%=user.Name%>" >Your Account</a>
             <% } %>
-            <form action="/results?room=<%=room%>&entry=<%=entry%>&exit=<%=exit%>", method="post">
+            <form action="/GuestDetail?room=<%=room%>&entry=<%=entry%>&exit=<%=exit%>", method="post">
                 <table>
                     <tr>
                        <th>RoomNumber</th>
