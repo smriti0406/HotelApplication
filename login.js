@@ -8,6 +8,8 @@ AWS.config.update({region: 'us-east-1'});
 const docClient = new AWS.DynamoDB.DocumentClient();
 const FindByToken = require('./controllers/middleware/FindByToken');
 const checkauth = require('./controllers/middleware/checkauth');
+
+
 module.exports = function(app){
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());
