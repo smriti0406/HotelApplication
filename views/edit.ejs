@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Smriti Hotel Application</title>
+        <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>Edit User Details</h1>
+        <div>
+            <p>Email: <%=user.Email%></p>
+            <form action="/edit?Name=<%=user.Name%>" method="post">
+                <label for="Name">Name:</label><br>
+                <input type="text", name="Name", value="<%=user.Name%>", required="true"><br>
+                <lable for="Address">Address:</lable><br>
+                <input type="text", name="address", value="<%=user.Address%>",required="true"><br>
+                <label for="id">Select id You have</label><br>
+                <select name = "id" id = "id">
+                   <option value="Addhar">Addhar Card</option>
+                   <option value="Pan">Pan Card</option>
+                </select><br>
+                <label for="Id_number">Enter the Id number You selected</label><br>
+                <input type="text", name="Id_number", value="<%=user.Id_number%>",required="true"><br>
+                <label for="contact">Contact Number</label><br>
+                <input type="tel", name="contact", value="<%=user.Contact%>", required="true"><br>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+            <form action="/logout" method="POST">
+                <button type="submit">logout</button>
+            </form>
+        </div>
+    </body>
+</html>

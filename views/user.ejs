@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Smriti Hotel Application</title>
+        <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>User Details</h1>
+        <%- include ('./partials/messages') %>
+        <div>
+            <p>Name: <%=user.Name%></p>  
+            <p>Address: <%=user.Address%></p> 
+            <p>Contact No: <%=user.Contact%></p>
+            <p>Provided Id Name: <%=user.ID%></p>
+            <p>ID Number: <%=user.Id_number%></p>
+            <a href="/home" >Home</a><br>
+            <a href="/edit?Name=<%=user.Name%>">Edit Details</a>
+            <form action="/logout" method="POST">
+                <button type="submit">logout</button>
+            </form>
+            
+        </div>
+    </body>
+</html>

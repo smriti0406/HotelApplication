@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Smriti Hotel Application</title>
+    </head>
+    <body>
+        <h1>Booking Detail</h1>
+        
+        <div>
+            <a href="/user?Name=<%=user.Name%>" >Your Account</a><br>
+            <p>Booking ID: <%=details.Booking_ID%></p>
+            <p>Room: <%=details.room%></p> 
+            <p>Probable Check INN time: <%=details.entry%></p> 
+            <p>Probable Check Out Time: <%=details.exit%></p>
+            <p>Guest Name: <%=details.Name%></p>  
+            <p>Guest Address: <%=details.Address%></p> 
+            <p>Contact No: <%=details.Contact%></p>
+            <p>Provided Id Name: <%=details.ID%></p>
+            <p>ID Number: <%=details.Id_number%></p>
+            <p>Estimated Current Price: <%=details.Price%></p>
+            <a href="/home" >Home</a><br>
+            <% if(user.Name!="guest") {%>
+                <form action="/logout" method="POST">
+                    <button type="submit">logout</button>
+                </form>
+            <% } %>
+        </div>
+    </body>
+</html>
