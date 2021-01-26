@@ -10,4 +10,4 @@ app.set('view engine', 'ejs');
 console.log("your are listening to port 8000");
 login(app);
 smritiController(app);
-app.listen(8000);
+app.listen(5000);

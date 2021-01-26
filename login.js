@@ -195,7 +195,8 @@ module.exports = function(app){
                         console.log(req.cookies.auth);
                         //req.user = user;
                         //console.log(req.user);
-                        res.render('smriti',{user: user})
+                        
+                        res.render('smriti',{user: user});
                     }
                 })
                 
